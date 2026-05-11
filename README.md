@@ -3,7 +3,7 @@
 
 This repository reproduces the results reported in the following paper:
 
-Z. Niu, Y. He, J. Galante, A. R. Gschwind, J. M. Engreitz, E. Katsevich. "PerturbPlan: A web application for designing Perturb-seq experiments."
+Z. Niu, Y. He, J. Galante, A. R. Gschwind, J. Ray, L. M. Steinmetz, J. M. Engreitz, E. Katsevich. "PerturbPlan: An analytical framework for designing Perturb-seq experiments."
 
 There are two options for reproducing results: [plotting from downloaded results](#option-1-quick-figures-from-downloaded-results) or [complete reanalysis](#option-2-complete-rerun-the-analyses).
 
