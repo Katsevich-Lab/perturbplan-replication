@@ -7,7 +7,7 @@ library(preseqR)
 
 # set seed and source necessary files
 set.seed(20)
-source("~/.Rprofile")
+source("config.R")
 source("saturation-curve-fitting/helper.R")
 
 # specify the directory to results

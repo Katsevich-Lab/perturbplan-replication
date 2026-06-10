@@ -25,7 +25,7 @@ if(experiment == "Ray"){
 }
 
 # source the necessary files
-source("~/.Rprofile")
+source("config.R")
 source("realdata-validation-pipeline/helper-preprocess.R")
 source("realdata-validation-pipeline/run_fc_distr_construction.R")
 

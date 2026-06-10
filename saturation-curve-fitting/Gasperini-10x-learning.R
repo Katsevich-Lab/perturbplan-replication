@@ -2,7 +2,7 @@
 library(perturbplan)
 library(ggplot2)
 library(scales)
-source("~/.Rprofile")
+source("config.R")
 source("saturation-curve-fitting/helper.R")
 
 # load learned pilot data

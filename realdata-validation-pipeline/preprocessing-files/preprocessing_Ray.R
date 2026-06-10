@@ -2,7 +2,7 @@
 library(sceptre)
 
 # source the helper function
-source("~/.Rprofile")
+source("config.R")
 source("realdata-validation-pipeline/helper-preprocess.R")
 
 # create preprocessing directory

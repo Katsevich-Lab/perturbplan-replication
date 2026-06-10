@@ -9,7 +9,7 @@ positive_proportion <- as.numeric(args[2])
 num_subsampled_genes <- as.numeric(args[3])
 
 # source the useful helper script
-source("~/.Rprofile")
+source("config.R")
 source("realdata-validation-pipeline/helper-preprocess.R")
 
 # specify the path to save the results

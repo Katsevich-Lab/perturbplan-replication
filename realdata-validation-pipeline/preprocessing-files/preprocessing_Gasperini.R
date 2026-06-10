@@ -1,6 +1,6 @@
 # This is a Rscript preparing for data preprocessing for Gasperini data
 # source the helper function
-source("~/.Rprofile")
+source("config.R")
 source("realdata-validation-pipeline/helper-preprocess.R")
 
 # create preprocessing directory
