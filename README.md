@@ -2,7 +2,7 @@
 
 This repository reproduces the results reported in the following paper:
 
-Z. Niu, Y. He, J. Galante, A. R. Gschwind, J. Ray, L. M. Steinmetz, J. M. Engreitz, E. Katsevich. "PerturbPlan: An analytical framework for designing Perturb-seq experiments."
+Z. Niu, Y. He, J. Galante, A. R. Gschwind, J. Ray, L. M. Steinmetz, J. M. Engreitz, E. Katsevich. "PerturbPlan: An analytical framework for designing Perturb-seq experiments." ([bioRxiv](https://doi.org/10.64898/2026.05.22.727199), 2026).
 
 There are two ways to reproduce the results:
 
