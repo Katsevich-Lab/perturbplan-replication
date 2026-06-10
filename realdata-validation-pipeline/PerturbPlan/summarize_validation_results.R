@@ -24,7 +24,7 @@ if(experiment == "Gasperini"){
 }
 
 # source the necessary scripts
-source("~/.Rprofile")
+source("config.R")
 source("realdata-validation-pipeline/helper-preprocess.R")
 
 # load the simulation results

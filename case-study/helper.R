@@ -1,6 +1,6 @@
 # This is a script crating helper functions for TAP-seq case study
 library(perturbplan)
-source("~/.Rprofile")
+source("config.R")
 
 # This is a script loading the discovery table for different datasets
 obtain_discovery_table <- function(dataset_name){

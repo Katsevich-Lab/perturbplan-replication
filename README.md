@@ -103,6 +103,11 @@ This option reruns the full pipeline from raw data. It **cannot** be run from a 
    echo 'LOCAL_10x_K562_DATA_DIR="/path/to/10x-K562"' >> ~/.research_config
    ```
 
+   The analysis scripts resolve these paths via the bundled `config.R` helper,
+   which they source automatically (run them from the repository root). You only
+   need to create `~/.research_config` as above — no `~/.Rprofile` setup is
+   required.
+
 6. **(Optional) Run simulation benchmarking.** Code for reproducing the simulation-based power estimates is available in this GitHub [repository](https://github.com/ZiangNiu6/Sceptre_Power_Simulations). For the comparison with PerturbPlan power, we use two output RDS files: [baseline_expression.rds](https://github.com/ZiangNiu6/Sceptre_Power_Simulations/blob/main/analysis/results_summary/baseline_expression.rds) and [averaged_simulation_results.rds](https://github.com/ZiangNiu6/Sceptre_Power_Simulations/blob/main/analysis/results_summary/averaged_simulation_results.rds). To skip the simulation step, these files are also provided in [this folder](https://github.com/Katsevich-Lab/experimental-design/tree/main/reproduction-code-prep/simulation-benchmarking).
 
 7. **Run the other analyses.** Run all commands from the repository root:
