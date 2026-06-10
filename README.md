@@ -15,8 +15,8 @@ There are two options for reproducing results: [plotting from downloaded results
 
 1. **Clone repository**
    ```bash
-   git clone git@github.com:Katsevich-Lab/experimental-design-manuscript.git
-   cd experimental-design-manuscript
+   git clone git@github.com:Katsevich-Lab/perturbplan-replication.git
+   cd perturbplan-replication
    ```
 
 2. **Generate figures and tables using R**
@@ -51,8 +51,8 @@ Figure 1, 2 and Extended table 1 are produced by Keynote (`Figure_1.key`, `Figur
 
 1. **Clone repository**
    ```bash
-   git clone git@github.com:Katsevich-Lab/experimental-design-manuscript.git
-   cd experimental-design-manuscript
+   git clone git@github.com:Katsevich-Lab/perturbplan-replication.git
+   cd perturbplan-replication
    ```
 
 2. **[Install](https://www.nextflow.io/docs/latest/getstarted.html#installation) and [configure](https://www.nextflow.io/docs/latest/config.html) Nextflow for your cluster**
