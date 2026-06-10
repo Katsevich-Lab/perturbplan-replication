@@ -1,10 +1,10 @@
 # This is a Rscript preparing for data preprocessing for Gasperini data
 # source the helper function
 source("~/.Rprofile")
-source("reproduction-code-prep/realdata-validation-pipeline/helper-preprocess.R")
+source("realdata-validation-pipeline/helper-preprocess.R")
 
 # create preprocessing directory
-preprocessing_dir <- "reproduction-code-prep/realdata-validation-pipeline/intermediate-files/Gasperini"
+preprocessing_dir <- "realdata-validation-pipeline/intermediate-files/Gasperini"
 dir.create(preprocessing_dir, recursive = TRUE)
 
 ##################### 1. Preprocess the at-scale data ##########################
@@ -107,4 +107,4 @@ cells_per_guide_df <- data.frame(
 discovery_pairs_extended <- discovery_pairs_at_scale |> dplyr::left_join(cells_per_guide_df, by = "grna_id")
 
 # save the discovery pairs
-saveRDS(discovery_pairs_extended, "reproduction-code-prep/realdata-validation-pipeline/intermediate-files/Gasperini/discovery_pairs.rds")
+saveRDS(discovery_pairs_extended, "realdata-validation-pipeline/intermediate-files/Gasperini/discovery_pairs.rds")

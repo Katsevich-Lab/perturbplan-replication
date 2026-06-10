@@ -7,10 +7,10 @@ library(perturbplan)
 library(ggplotify)
 
 # load the plotting object
-dir_to_rds <- "reproduction-code-prep/case-study/TAP-seq-case-study/results/"
+dir_to_rds <- "case-study/TAP-seq-case-study/results/"
 
 # define the plots_dir
-plots_dir <- "reproduction-code-prep/final_plots/figures"
+plots_dir <- "final_plots/figures"
 if(!dir.exists(plots_dir)){
   dir.create(plots_dir, recursive = TRUE)
 }

@@ -5,8 +5,8 @@
 library(writexl)
 library(dplyr)
 
-results_dir   <- "reproduction-code-prep"
-plots_dir     <- "reproduction-code-prep/final_plots/figures"
+results_dir   <- "."
+plots_dir     <- "final_plots/figures"
 out_xlsx      <- file.path(plots_dir, "source_data.xlsx")
 
 # Accumulator for all sheets
@@ -41,7 +41,7 @@ add_sheets("fig3", list(
 # ============================================================================
 # Figure 4 (Perturb-seq case study, three datasets)
 # ============================================================================
-f4_dir <- "reproduction-code-prep/case-study/perturb-seq-case-study/results/"
+f4_dir <- "case-study/perturb-seq-case-study/results/"
 load_three <- function(rel_path) {
   dplyr::bind_rows(
     readRDS(paste0(f4_dir, "Morris/",    rel_path)) |> dplyr::mutate(assay = "Morris"),
@@ -72,7 +72,7 @@ add_sheets("fig4", list(
 # ============================================================================
 # Figure 5 (TAP-seq vs Perturb-seq case study)
 # ============================================================================
-f5_dir <- "reproduction-code-prep/case-study/TAP-seq-case-study/results/"
+f5_dir <- "case-study/TAP-seq-case-study/results/"
 
 sat_plot <- readRDS(paste0(f5_dir, "saturation_plotting.rds"))
 # Patchwork stored the saturation curves in the "inset" slot and the
@@ -125,7 +125,7 @@ add_sheets("fig5", list(
 # ============================================================================
 # Extended Figure 1 (dataset metrics bar plots)
 # ============================================================================
-ext1_summary <- readRDS("reproduction-code-prep/final_plots/Extended_figure_1/cells_and_reads_summary.rds")
+ext1_summary <- readRDS("final_plots/Extended_figure_1/cells_and_reads_summary.rds")
 ext1_df <- do.call(rbind, lapply(ext1_summary, function(x) {
   data.frame(
     dataset                  = x$dataset_name %||% NA_character_,
@@ -140,7 +140,7 @@ add_sheets("extfig1", list(dataset_metrics = ext1_df))
 # ============================================================================
 # Extended Figure 3 (saturation curve validation + downsampling)
 # ============================================================================
-sat_dir <- "reproduction-code-prep/saturation-curve-fitting/results"
+sat_dir <- "saturation-curve-fitting/results"
 add_sheets("extfig3", list(
   ab_validation_curves = readRDS(sprintf("%s/saturation_curve_comparison.rds", sat_dir)),
   c_K562_downsampled   = readRDS(sprintf("%s/saturation_curve_comparison_varying_sequencing_depth.rds", sat_dir)),
@@ -199,7 +199,7 @@ add_sheets("extfig4", list(
 # ============================================================================
 # Cost minimization demonstration (recompute from scratch into a child env)
 # ============================================================================
-source("reproduction-code-prep/final_plots/cost_minimization_demonstration.R")
+source("final_plots/cost_minimization_demonstration.R")
 add_sheets("fig1", list(
   f_equi_power_curve = power_data,
   f_equi_cost_curve  = cost_data,
@@ -209,7 +209,7 @@ add_sheets("fig1", list(
 # ============================================================================
 # Supplementary FDP curve figure (recompute from scratch)
 # ============================================================================
-source("reproduction-code-prep/final_plots/Supplementary-figure-FDP-curve.R")
+source("final_plots/Supplementary-figure-FDP-curve.R")
 fdp_df <- analytic_results |>
   dplyr::filter(num_total_cells == 37888, reads_per_cell %in% c(12287, 22117))
 add_sheets("supp_fdp", list(FDP_vs_cutoff = fdp_df))

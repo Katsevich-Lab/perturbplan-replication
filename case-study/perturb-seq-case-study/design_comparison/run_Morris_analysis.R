@@ -2,7 +2,7 @@
 library(dplyr)
 
 # source helper script
-source("reproduction-code-prep/case-study/helper.R")
+source("case-study/helper.R")
 
 # load K562 pilot data
 data("K562_Gasperini", package = "perturbplan")
@@ -12,13 +12,13 @@ discovery_dataset <- "Morris"
 discovery_table <- obtain_discovery_table(dataset_name = discovery_dataset)
 
 # path to power results
-dir_to_results <- sprintf("reproduction-code-prep/case-study/perturb-seq-case-study/results/%s/", discovery_dataset)
+dir_to_results <- sprintf("case-study/perturb-seq-case-study/results/%s/", discovery_dataset)
 if(!dir.exists(dir_to_results)){
   dir.create(dir_to_results, recursive = TRUE)
 }
 
 ############################## Obtain fixed parameters #########################
-fixed_parameters <- readRDS("reproduction-code-prep/case-study/fixed_parameters.rds")
+fixed_parameters <- readRDS("case-study/fixed_parameters.rds")
 fdr_target <- fixed_parameters$fdr_target
 precision <- fixed_parameters$precision
 mapping_efficiency <- fixed_parameters$mapping_efficiency
@@ -52,7 +52,7 @@ num_total_cells <- 46583
 sequenced_reads_per_cell <- round(60000 / mapping_efficiency)
 
 # extract gRNAs per target 
-grna_df <- readxl::read_excel("reproduction-code-prep/case-study/discovery-table/morris_2023_table_s3.xlsx", 
+grna_df <- readxl::read_excel("case-study/discovery-table/morris_2023_table_s3.xlsx", 
                               sheet = "Table S3A", skip = 2)
 gRNAs_per_target <- round(
   grna_df |>
@@ -90,14 +90,14 @@ library_parameters <- K562_Gasperini$library_parameters
 
 ###################### Perform the retrospective analyses ######################
 # retrospective analysis
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/retrospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/retrospective_analysis.R")
 
 # do retrospective plotting
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/plot_retrospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/plot_retrospective_analysis.R")
 
 ######################### Perform cost-power analysis ##########################
 # prospective analysis
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/prospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/prospective_analysis.R")
 
 # do prospective analysis plot
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/plot_prospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/plot_prospective_analysis.R")

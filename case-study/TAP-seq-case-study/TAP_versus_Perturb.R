@@ -4,25 +4,25 @@ library(perturbplan)
 set.seed(1)
 
 # source necessary files
-source("reproduction-code-prep/case-study/helper.R")
+source("case-study/helper.R")
 
 # load sceptre object
 sceptre_object <- readRDS(paste0(.get_config_path("LOCAL_RAY_2025_RAW_DATA_DIR"), "raw/sceptre_output/final_sceptre_object.rds"))
 
 # load TAP-seq pilot data
-pilot_data <- readRDS("reproduction-code-prep/case-study/auxiliary-files/discovery_es_at_scale.rds")
+pilot_data <- readRDS("case-study/auxiliary-files/discovery_es_at_scale.rds")
 
 # load discovery table
 discovery_table <- obtain_discovery_table(dataset_name = "Ray")
 
 # path to power results
-dir_to_results <- "reproduction-code-prep/case-study/TAP-seq-case-study/results/"
+dir_to_results <- "case-study/TAP-seq-case-study/results/"
 if(!dir.exists(dir_to_results)){
   dir.create(dir_to_results, recursive = TRUE)
 }
 
 ############################## Obtain fixed parameters #########################
-fixed_parameters <- readRDS("reproduction-code-prep/case-study/fixed_parameters.rds")
+fixed_parameters <- readRDS("case-study/fixed_parameters.rds")
 fdr_target <- fixed_parameters$fdr_target
 precision <- fixed_parameters$precision
 mapping_efficiency_perturb <- fixed_parameters$mapping_efficiency
@@ -44,7 +44,7 @@ minimum_fold_change_retrospective_list <- fixed_parameters$minimum_fold_change_r
 
 ############################ import TAP-seq pilot data #########################
 # Extract reads per cell
-reads_per_cell <- round((readRDS("reproduction-code-prep/case-study/auxiliary-files/summary_persample.rds") |> 
+reads_per_cell <- round((readRDS("case-study/auxiliary-files/summary_persample.rds") |> 
                            as.data.frame() |>
                            dplyr::summarise(reads_per_cell = sum(num_cells * avg_reads) / sum(num_cells)) |> 
                            dplyr::pull()) / mapping_efficiency_perturb)
@@ -90,14 +90,14 @@ library_parameters_tap <- baseline_info$library_parameters_tap
 
 #################### Perform the retrospective analyses ########################
 # Perform power analysis
-source("reproduction-code-prep/case-study/TAP-seq-case-study/retrospective_analysis.R")
+source("case-study/TAP-seq-case-study/retrospective_analysis.R")
 
 # plot for retrospective analysis
-source("reproduction-code-prep/case-study/TAP-seq-case-study/plot_retrospective_analysis.R")
+source("case-study/TAP-seq-case-study/plot_retrospective_analysis.R")
 
 #################### Perform the prospective analyses ##########################
 # Perform cost-power analysis
-source("reproduction-code-prep/case-study/TAP-seq-case-study/prospective_analysis.R")
+source("case-study/TAP-seq-case-study/prospective_analysis.R")
 
 # plot for retrospective analysis
-source("reproduction-code-prep/case-study/TAP-seq-case-study/plot_prospective_analysis.R")
+source("case-study/TAP-seq-case-study/plot_prospective_analysis.R")

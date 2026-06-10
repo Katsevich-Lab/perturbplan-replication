@@ -1,51 +1,57 @@
-
-# PerturbPlan: A web application for designing Perturb-seq experiments
+# Reproducing the PerturbPlan manuscript
 
 This repository reproduces the results reported in the following paper:
 
-Z. Niu, Y. He, J. Galante, A. R. Gschwind, J. Ray, L. M. Steinmetz, J. M. Engreitz, E. Katsevich. "PerturbPlan: An analytical framework for designing Perturb-seq experiments."
+Z. Niu, Y. He, J. Galante, A. R. Gschwind, J. Ray, L. M. Steinmetz, J. M. Engreitz, E. Katsevich. "PerturbPlan: An analytical framework for designing Perturb-seq experiments." ([bioRxiv](https://doi.org/10.64898/2026.05.22.727199), 2026).
 
-There are two options for reproducing results: [plotting from downloaded results](#option-1-quick-figures-from-downloaded-results) or [complete reanalysis](#option-2-complete-rerun-the-analyses).
+There are two ways to reproduce the results:
 
-## Option 1 (quick): Figures from Downloaded Results
+- **[Option 1 (quick): figures from precomputed results](#option-1-quick-figures-from-precomputed-results)** — runs on a laptop and is **fully self-contained**: it regenerates the manuscript figures and tables from precomputed result files included in this repository. No external data or configuration is required.
+- **[Option 2 (complete): rerun all analyses](#option-2-complete-rerun-all-analyses)** — reruns the entire pipeline from raw data. This requires an HPC cluster, the raw CRISPR datasets, and path configuration.
 
-**Requirements:** Laptop or desktop with R installed and a Unix-like OS (e.g. MacOS or Windows WSL2). Package dependencies are automatically installed by the scripts via `renv`.
+R package dependencies for both options are pinned in `renv.lock` and installed with `renv::restore()`.
+
+## Option 1 (quick): Figures from Precomputed Results
+
+This option regenerates the manuscript figures and tables from precomputed result files that are included in this repository. It is fully self-contained — **no external data and no `~/.research_config` are needed.**
+
+**Requirements:** a laptop or desktop running **R 4.4.1** and a Unix-like OS (e.g. macOS or Windows WSL2). The pinned environment in `renv.lock` (R 4.4.1, Bioconductor 3.19) is built for R 4.4.1; restoring it on substantially newer R versions may fail to compile some dependencies.
 
 ### Steps
 
-1. **Clone repository**
+1. **Get the code.** Clone the repository (or use the copy bundled in the supplementary software):
    ```bash
    git clone git@github.com:Katsevich-Lab/perturbplan-replication.git
    cd perturbplan-replication
    ```
 
-2. **Generate figures and tables using R**
+2. **Generate figures and tables using R.** Run all commands from the repository root:
    ```bash
-   # Install R packages
+   # Install the pinned R package environment
    Rscript -e 'renv::activate(); renv::restore()'
-   
-   # Figure 3-5
-   Rscript reproduction-code-prep/final_plots/Figure_3.R
-   Rscript reproduction-code-prep/final_plots/Figure_4.R
-   Rscript reproduction-code-prep/final_plots/Figure_5.R
-   
-   # Extended Figure 1, 3-4
-   Rscript reproduction-code-prep/final_plots/Extended_figure_1/produce_table.R
-   Rscript reproduction-code-prep/final_plots/Extended_figure_3.R
-   Rscript reproduction-code-prep/final_plots/Extended_figure_4.R
-   
-   # FDP curve
-   Rscript reproduction-code-prep/final_plots/Supplementary-figure-FDP-curve.R
-   ```
-Figures and tables will be saved to `reproduction-code-prep/final_plots/figures/`.
 
-3. **Polish figures using Keynote**
-Figure 1, 2 and Extended table 1 are produced by Keynote (`Figure_1.key`, `Figure_2.key` and `Extended_table_1.key` under folder `reproduction-code-prep/final_plots/`, respectively). Figure 4 is also created by Keynote with `reproduction-code-prep/final_plots/figures/figure_4.R`. Extended figure 2 is a screenshot of [PerturbPlanApp](https://katsevich-lab-perturbplan.share.connect.posit.cloud/). 
+   # Figures 3-5
+   Rscript final_plots/Figure_3.R
+   Rscript final_plots/Figure_4.R
+   Rscript final_plots/Figure_5.R
+
+   # Extended Figures 1, 3-4
+   Rscript final_plots/Extended_figure_1/produce_table.R
+   Rscript final_plots/Extended_figure_3.R
+   Rscript final_plots/Extended_figure_4.R
+
+   # Supplementary FDP curve
+   Rscript final_plots/Supplementary-figure-FDP-curve.R
+   ```
+   Figures and tables are written to `final_plots/figures/`.
+
+3. **Polish figures using Keynote.** Figures 1 and 2 and Extended Table 1 are assembled in Keynote (`Figure_1.key`, `Figure_2.key`, and `Extended_table_1.key` under `final_plots/`, respectively). Figure 4 is also finalized in Keynote from `final_plots/figures/figure_4.R`. Extended Figure 2 is a screenshot of [PerturbPlanApp](https://katsevich-lab-perturbplan.share.connect.posit.cloud/).
 
 ## Option 2 (Complete): Rerun All Analyses
 
-**Requirements:** HPC cluster with SGE job scheduler with R installed. Package dependencies are automatically installed by the scripts via `renv`.
+This option reruns the full pipeline from raw data. It **cannot** be run from a laptop: it requires an HPC cluster, the raw CRISPR datasets, and path configuration via `~/.research_config`.
 
+**Requirements:** an HPC cluster with an SGE job scheduler and R installed; Nextflow; the raw datasets listed below; and a `~/.research_config` file.
 
 ### Steps
 
@@ -62,18 +68,18 @@ Figure 1, 2 and Extended table 1 are produced by Keynote (`Figure_1.key`, `Figur
 4. **Delete existing results**
    ```bash
    # Delete realdata validation results
-   rm -rf reproduction-code-prep/realdata-validation-pipeline/intermediate-files
-   rm -rf reproduction-code-prep/realdata-validation-pipeline/PerturbPlan/results
-   
+   rm -rf realdata-validation-pipeline/intermediate-files
+   rm -rf realdata-validation-pipeline/PerturbPlan/results
+
    # Delete case study results
-   rm -rf reproduction-code-prep/case-study/perturb-seq-case-study/results
-   rm -rf reproduction-code-prep/case-study/TAP-seq-case-study/results
-   
+   rm -rf case-study/perturb-seq-case-study/results
+   rm -rf case-study/TAP-seq-case-study/results
+
    # Delete saturation curve fitting results
-   rm -rf reproduction-code-prep/saturation-curve-fitting/results
-   
+   rm -rf saturation-curve-fitting/results
+
    # Delete simulation benchmarking results
-   rm reproduction-code-prep/simulation-benchmarking/benchmarking_plot.rds
+   rm simulation-benchmarking/benchmarking_plot.rds
    ```
 
 5. **Configure paths**
@@ -96,35 +102,31 @@ Figure 1, 2 and Extended table 1 are produced by Keynote (`Figure_1.key`, `Figur
    # 10x K562 dataset, generated by https://github.com/Katsevich-Lab/import-10X-2018
    echo 'LOCAL_10x_K562_DATA_DIR="/path/to/10x-K562"' >> ~/.research_config
    ```
-   
 
-6. **(Optional) Run simulation benchmarking** Code for reproducing the simulation-based power estimates is available in this GitHub [repository](https://github.com/ZiangNiu6/Sceptre_Power_Simulations). For the comparison with PerturbPlan power, we use two output RDS files: [baseline_expression.rds](https://github.com/ZiangNiu6/Sceptre_Power_Simulations/blob/main/analysis/results_summary/baseline_expression.rds) and [averaged_simulation_results.rds](https://github.com/ZiangNiu6/Sceptre_Power_Simulations/blob/main/analysis/results_summary/averaged_simulation_results.rds). To skip the simulation step, these files are also provided in [this folder](https://github.com/Katsevich-Lab/experimental-design/tree/main/reproduction-code-prep/simulation-benchmarking).
+6. **(Optional) Run simulation benchmarking.** Code for reproducing the simulation-based power estimates is available in this GitHub [repository](https://github.com/ZiangNiu6/Sceptre_Power_Simulations). For the comparison with PerturbPlan power, we use two output RDS files: [baseline_expression.rds](https://github.com/ZiangNiu6/Sceptre_Power_Simulations/blob/main/analysis/results_summary/baseline_expression.rds) and [averaged_simulation_results.rds](https://github.com/ZiangNiu6/Sceptre_Power_Simulations/blob/main/analysis/results_summary/averaged_simulation_results.rds). To skip the simulation step, these files are also provided in [this folder](https://github.com/Katsevich-Lab/experimental-design/tree/main/reproduction-code-prep/simulation-benchmarking).
 
-7. **Run the other analyses**
+7. **Run the other analyses.** Run all commands from the repository root:
    ```bash
-   # Install R packages
+   # Install the pinned R package environment
    Rscript -e 'renv::activate(); renv::restore()'
-   
-   # For simulation validation 
-   Rscript reproduction-code-prep/simulation-benchmarking/power_comparison.R
-  
+
+   # For simulation validation
+   Rscript simulation-benchmarking/power_comparison.R
+
    # For real data downsampling validation
    qsub run_realdata_validation_working.sh Ray
    qsub run_realdata_validation_working.sh Gasperini
-   
+
    # For saturation curve downsampling analyses
-   Rscript reproduction-code-prep/saturation-curve-fitting/saturation-curve-comparison.R
+   Rscript saturation-curve-fitting/saturation-curve-comparison.R
    qsub run_saturation_curve_learning.sh
-   
+
    # For Perturb-seq case-study results
-   Rscript reproduction-code-prep/case-study/perturb-seq-case-study/drive.R
-   
+   Rscript case-study/perturb-seq-case-study/drive.R
+
    # For TAP-seq case-study results
-   Rscript reproduction-code-prep/case-study/TAP-seq-case-study/TAP_versus_Perturb.R
+   Rscript case-study/TAP-seq-case-study/TAP_versus_Perturb.R
    ```
-Results will be saved to `/path/for/output/results`. 
+   Results are written to the directory set in `LOCAL_PERTURBPLAN_DATA_DIR`.
 
-8. **Generate figures and tables**
-Same as the Step 2-3 in Option 1. 
-
-</details>
+8. **Generate figures and tables.** Same as Steps 2-3 in Option 1.

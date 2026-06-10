@@ -50,4 +50,4 @@ fixed_parameters <- list(
 )
 
 # save the fixed parameters
-saveRDS(fixed_parameters, "reproduction-code-prep/case-study/fixed_parameters.rds")
+saveRDS(fixed_parameters, "case-study/fixed_parameters.rds")

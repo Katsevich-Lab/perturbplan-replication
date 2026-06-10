@@ -273,7 +273,7 @@ cost_over_primer_efficiency_plot <- optimal_cost_eff_df |>
   )
 
 # add inset plot
-source("reproduction-code-prep/case-study/TAP-seq-case-study/saturation_relative_expression_comparison.R")
+source("case-study/TAP-seq-case-study/saturation_relative_expression_comparison.R")
 cost_over_primer_efficiency_plot <- cost_over_primer_efficiency_plot + 
   patchwork::inset_element(
     relative_expression_profile_inset +

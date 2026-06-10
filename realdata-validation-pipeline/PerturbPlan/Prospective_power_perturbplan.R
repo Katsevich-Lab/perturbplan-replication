@@ -26,18 +26,18 @@ if(experiment == "Ray"){
 
 # source the necessary files
 source("~/.Rprofile")
-source("reproduction-code-prep/realdata-validation-pipeline/helper-preprocess.R")
-source("reproduction-code-prep/realdata-validation-pipeline/run_fc_distr_construction.R")
+source("realdata-validation-pipeline/helper-preprocess.R")
+source("realdata-validation-pipeline/run_fc_distr_construction.R")
 
 # specify intermediate files
-intermediate_files_folder <- "reproduction-code-prep/realdata-validation-pipeline/intermediate-files/"
+intermediate_files_folder <- "realdata-validation-pipeline/intermediate-files/"
 
 # specify the fc_tail_list (replacing fc_spread_list)
 fc_tail_list <- c("light_tail", "medium_tail", "heavy_tail")
 
 ########################## 1. Compute library size #############################
 # fit S-M curve
-source("reproduction-code-prep/realdata-validation-pipeline/run_fitting_S_M_curve.R")
+source("realdata-validation-pipeline/run_fitting_S_M_curve.R")
 
 # load the parameter grid
 plan_parameter_grid <- readRDS(sprintf("%s/%s/real_data_parameter_grid.rds", intermediate_files_folder, experiment))
@@ -167,7 +167,7 @@ for (grid_id_cur in library_size_estimate$grid_id) {
 }
 
 # save the results
-path_to_save <- "reproduction-code-prep/realdata-validation-pipeline/PerturbPlan/results"
+path_to_save <- "realdata-validation-pipeline/PerturbPlan/results"
 if(!dir.exists(path_to_save)){
   dir.create(path_to_save, recursive = TRUE)
 }

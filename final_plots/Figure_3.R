@@ -5,13 +5,13 @@ library(cowplot)
 library(stringr)
 
 # define the plots_dir
-plots_dir <- "reproduction-code-prep/final_plots/figures"
+plots_dir <- "final_plots/figures"
 if(!dir.exists(plots_dir)){
   dir.create(plots_dir, recursive = TRUE)
 }
 
 # define the top folder for results
-results_dir <- "reproduction-code-prep"
+results_dir <- "."
 
 # load the plotting object for benchmarking (Figure 2(a))
 simulation_benchmark <- readRDS(sprintf("%s/simulation-benchmarking/benchmarking_plot.rds", results_dir))

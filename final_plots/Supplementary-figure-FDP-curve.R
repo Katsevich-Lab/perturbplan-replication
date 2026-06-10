@@ -17,19 +17,18 @@ downsampled_guides_per_target <- 2
 cutoff_grid <- exp(seq(log(1e-5), log(1e-1), length.out = 500))
 
 # source the necessary files
-source("~/.Rprofile")
-source("reproduction-code-prep/realdata-validation-pipeline/helper-preprocess.R")
-source("reproduction-code-prep/realdata-validation-pipeline/run_fc_distr_construction.R")
+source("realdata-validation-pipeline/helper-preprocess.R")
+source("realdata-validation-pipeline/run_fc_distr_construction.R")
 
 # specify intermediate files
-intermediate_files_folder <- "reproduction-code-prep/realdata-validation-pipeline/intermediate-files/"
+intermediate_files_folder <- "realdata-validation-pipeline/intermediate-files/"
 
 # specify the fc_tail_list (replacing fc_spread_list)
 fc_tail_list <- c("light_tail", "heavy_tail")
 
 ########################## 1. Compute library size #############################
 # fit S-M curve
-source("reproduction-code-prep/realdata-validation-pipeline/run_fitting_S_M_curve.R")
+source("realdata-validation-pipeline/run_fitting_S_M_curve.R")
 
 # load the parameter grid
 plan_parameter_grid <- readRDS(sprintf("%s/%s/real_data_parameter_grid.rds", intermediate_files_folder, experiment))
@@ -192,6 +191,6 @@ FDP_versus_cutoff_plot <- analytic_results |>
   )
   
 # save the plot 
-path_to_save <- "reproduction-code-prep/final_plots/figures/"
+path_to_save <- "final_plots/figures/"
 ggsave(sprintf("%s/FDP_curve_estimation.pdf", path_to_save), FDP_versus_cutoff_plot, width = 7.5, height = 7.5)
 

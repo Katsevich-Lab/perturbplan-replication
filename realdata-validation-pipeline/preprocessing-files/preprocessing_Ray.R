@@ -3,10 +3,10 @@ library(sceptre)
 
 # source the helper function
 source("~/.Rprofile")
-source("reproduction-code-prep/realdata-validation-pipeline/helper-preprocess.R")
+source("realdata-validation-pipeline/helper-preprocess.R")
 
 # create preprocessing directory
-preprocessing_dir <- "reproduction-code-prep/realdata-validation-pipeline/intermediate-files/Ray"
+preprocessing_dir <- "realdata-validation-pipeline/intermediate-files/Ray"
 dir.create(preprocessing_dir, recursive = TRUE)
 
 ##################### 1. Preprocess the at-scale data ##########################
@@ -53,8 +53,8 @@ for (sample_dir in sample_dirs_list) {
 }
 
 # save the summary information
-summary_sample_path <- "reproduction-code-prep/realdata-validation-pipeline/intermediate-files/Ray/summary_SRR.rds"
-summary_persample_path <- "reproduction-code-prep/realdata-validation-pipeline/intermediate-files/Ray/summary_persample.rds"
+summary_sample_path <- "realdata-validation-pipeline/intermediate-files/Ray/summary_SRR.rds"
+summary_persample_path <- "realdata-validation-pipeline/intermediate-files/Ray/summary_persample.rds"
 if(!file.exists(summary_sample_path)){
   summary_sample <- list(
     minimum_num_cells = min(summary_persample[, "num_cells"]),
@@ -147,4 +147,4 @@ discovery_pairs <- dplyr::bind_rows(positive_pairs, negative_pairs) |>
   dplyr::mutate(num_total_plan_cells = ncol(grna_matrix))
 
 # save the discovery pairs
-saveRDS(discovery_pairs, "reproduction-code-prep/realdata-validation-pipeline/intermediate-files/Ray/discovery_pairs.rds")
+saveRDS(discovery_pairs, "realdata-validation-pipeline/intermediate-files/Ray/discovery_pairs.rds")
