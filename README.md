@@ -15,7 +15,7 @@ R package dependencies for both options are pinned in `renv.lock` and installed 
 
 This option regenerates the manuscript figures and tables from precomputed result files that are included in this repository. It is fully self-contained — **no external data and no `~/.research_config` are needed.**
 
-**Requirements:** a laptop or desktop running **R 4.4.1** and a Unix-like OS (e.g. macOS or Windows WSL2). The pinned environment in `renv.lock` (R 4.4.1, Bioconductor 3.19) is built for R 4.4.1; restoring it on substantially newer R versions may fail to compile some dependencies.
+**Requirements:** **R 4.4.1** and a Unix-like OS (e.g. macOS or Windows WSL2). The pinned environment (`renv.lock`, R 4.4.1 / Bioconductor 3.19) is built for R 4.4.1; restoring it on substantially newer R versions may fail to compile some dependencies. If you don't already have R 4.4.1, install it **alongside** your current R (it does not replace it): `rig add 4.4.1` with [rig](https://github.com/r-lib/rig), or the signed CRAN installer under <https://cran.r-project.org/bin/>.
 
 ### Steps
 
