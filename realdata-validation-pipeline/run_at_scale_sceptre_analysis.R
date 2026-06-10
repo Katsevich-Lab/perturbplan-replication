@@ -10,10 +10,10 @@ num_subsampled_genes <- as.numeric(args[3])
 
 # source the useful helper script
 source("~/.Rprofile")
-source("reproduction-code-prep/realdata-validation-pipeline/helper-preprocess.R")
+source("realdata-validation-pipeline/helper-preprocess.R")
 
 # specify the path to save the results
-path_to_save <- sprintf("reproduction-code-prep/realdata-validation-pipeline/intermediate-files/%s", experiment)
+path_to_save <- sprintf("realdata-validation-pipeline/intermediate-files/%s", experiment)
 
 # skip the analysis if the results are already obtained
 if(!file.exists(sprintf("%s/discovery_es_at_scale.rds", path_to_save))){
@@ -23,7 +23,7 @@ if(!file.exists(sprintf("%s/discovery_es_at_scale.rds", path_to_save))){
   
   ############################### 1. Obtain necessary information ##############
   # load the discovery pairs
-  discovery_pairs <- readRDS(sprintf("reproduction-code-prep/realdata-validation-pipeline/intermediate-files/%s/discovery_pairs.rds", experiment))
+  discovery_pairs <- readRDS(sprintf("realdata-validation-pipeline/intermediate-files/%s/discovery_pairs.rds", experiment))
   gene_list <- unique(discovery_pairs$response_id)
   
   # obtain the data directory

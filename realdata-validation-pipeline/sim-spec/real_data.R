@@ -11,7 +11,7 @@ grna_threshold <- as.numeric(args[3])
 downsampled_guides_per_target <- as.numeric(args[4])
 
 # obtain the intermediate-files path
-intermediate_files_path <- sprintf("reproduction-code-prep/realdata-validation-pipeline/intermediate-files/%s", experiment)
+intermediate_files_path <- sprintf("realdata-validation-pipeline/intermediate-files/%s", experiment)
 
 # obtain the discovery pairs
 discovery_pairs <- readRDS(sprintf("%s/discovery_es_at_scale.rds", intermediate_files_path))
@@ -87,8 +87,8 @@ fixed_parameters <- list(
 generate_subsampled_data <- function(R, N, experiment, discovery_pairs, grna_threshold, downsampled_guides_per_target = 10){
   
   ################### source the helper script #################################
-  source(paste0(.get_config_path("LOCAL_CODE_DIR"), "experimental-design/reproduction-code-prep/realdata-validation-pipeline/helper-preprocess.R"))
-  source(paste0(.get_config_path("LOCAL_CODE_DIR"), "experimental-design/reproduction-code-prep/realdata-validation-pipeline/helper-subsample-analysis.R"))
+  source("realdata-validation-pipeline/helper-preprocess.R")
+  source("realdata-validation-pipeline/helper-subsample-analysis.R")
 
   ################### obtain subsample with the (R, N) #########################
   subsampled_data <- switch (experiment,
@@ -99,8 +99,7 @@ generate_subsampled_data <- function(R, N, experiment, discovery_pairs, grna_thr
                                     grna_of_interest = unique(discovery_pairs$grna_id))
     },
     Ray = {
-      sample_summary <- readRDS(paste0(.get_config_path("LOCAL_CODE_DIR"),
-                                       "experimental-design/reproduction-code-prep/realdata-validation-pipeline/intermediate-files/Ray/summary_persample.rds"))
+      sample_summary <- readRDS("realdata-validation-pipeline/intermediate-files/Ray/summary_persample.rds")
       construct_subsample_Ray(plan_experiment = experiment,
                               R = R, N = N,
                               gene_of_interest = unique(discovery_pairs$response_id),
@@ -250,7 +249,7 @@ simulatr_spec <- simulatr_specifier(
 saveRDS(parameter_grid |> dplyr::mutate(grid_id = 1:dplyr::n()), sprintf("%s/real_data_parameter_grid.rds", intermediate_files_path))
 
 # save the simulatr specifier
-saveRDS(simulatr_spec, sprintf("reproduction-code-prep/realdata-validation-pipeline/sim-spec/real_data_%s.rds", experiment))
+saveRDS(simulatr_spec, sprintf("realdata-validation-pipeline/sim-spec/real_data_%s.rds", experiment))
 
 # # run the simulation
 # B_in = 1

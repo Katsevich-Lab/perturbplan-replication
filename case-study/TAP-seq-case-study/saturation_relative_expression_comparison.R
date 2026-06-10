@@ -6,10 +6,10 @@ library(cowplot)
 library(patchwork)
 
 # source necessary files
-source("reproduction-code-prep/case-study/helper.R")
+source("case-study/helper.R")
 
 # load TAP-seq pilot data
-pilot_data <- readRDS("reproduction-code-prep/case-study/auxiliary-files/discovery_es_at_scale.rds")
+pilot_data <- readRDS("case-study/auxiliary-files/discovery_es_at_scale.rds")
 
 # set the primer efficiency threshold: lower bound on share-normalized
 # TAP/Perturb ratio. 0.4 corresponds to "40% primer efficiency".
@@ -22,13 +22,13 @@ UMI_threshold <- 1
 extracted_pilot_data <- get_baseline_expression(primer_efficiency_threshold = 0, pilot_data = pilot_data)
 
 # path to power results
-dir_to_results <- "reproduction-code-prep/case-study/TAP-seq-case-study/results/"
+dir_to_results <- "case-study/TAP-seq-case-study/results/"
 if(!dir.exists(dir_to_results)){
   dir.create(dir_to_results, recursive = TRUE)
 }
 
 ############################## Obtain fixed parameters #########################
-fixed_parameters <- readRDS("reproduction-code-prep/case-study/fixed_parameters.rds")
+fixed_parameters <- readRDS("case-study/fixed_parameters.rds")
 mapping_efficiency_perturb <- 1
 mapping_efficiency_tap <- fixed_parameters$mapping_efficiency_tap / fixed_parameters$mapping_efficiency
 

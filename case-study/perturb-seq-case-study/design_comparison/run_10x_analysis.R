@@ -2,7 +2,7 @@
 library(dplyr)
 
 # source helper script
-source("reproduction-code-prep/case-study/helper.R")
+source("case-study/helper.R")
 
 # load the discovery results
 discovery_dataset <- "K562_10x"
@@ -12,13 +12,13 @@ discovery_table <- obtain_discovery_table(dataset_name = "Gasperini")
 data("K562_10x", package = "perturbplan")
 
 # path to power results
-dir_to_results <- sprintf("reproduction-code-prep/case-study/perturb-seq-case-study/results/%s/", discovery_dataset)
+dir_to_results <- sprintf("case-study/perturb-seq-case-study/results/%s/", discovery_dataset)
 if(!dir.exists(dir_to_results)){
   dir.create(dir_to_results, recursive = TRUE)
 }
 
 ############################## Obtain fixed parameters #########################
-fixed_parameters <- readRDS("reproduction-code-prep/case-study/fixed_parameters.rds")
+fixed_parameters <- readRDS("case-study/fixed_parameters.rds")
 fdr_target <- fixed_parameters$fdr_target
 precision <- fixed_parameters$precision
 mapping_efficiency <- fixed_parameters$mapping_efficiency
@@ -85,14 +85,14 @@ library_parameters <- K562_10x$library_parameters
 
 ###################### Perform the retrospective analyses ######################
 # retrospective analysis
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/retrospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/retrospective_analysis.R")
 
 # do retrospective plotting
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/plot_retrospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/plot_retrospective_analysis.R")
 
 ######################### Perform cost-power analysis ##########################
 # prospective analysis
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/prospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/prospective_analysis.R")
 
 # do prospective analysis plot
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/plot_prospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/plot_prospective_analysis.R")

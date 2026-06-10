@@ -3,7 +3,7 @@ library(perturbplan)
 library(ggplot2)
 library(scales)
 source("~/.Rprofile")
-source("reproduction-code-prep/saturation-curve-fitting/helper.R")
+source("saturation-curve-fitting/helper.R")
 
 # load learned pilot data
 data("K562_Gasperini")
@@ -15,7 +15,7 @@ num_SRR_in_use <- 8
 downsampling_ratio_list <- 10^{seq(-2, 0, length.out = 20)}
 
 # make directory
-dir_to_results <- "reproduction-code-prep/saturation-curve-fitting/results"
+dir_to_results <- "saturation-curve-fitting/results"
 if(!dir.exists(dir_to_results)){
   dir.create(dir_to_results)
 }

@@ -56,8 +56,8 @@ echo "env.R_LIBS_USER = \"$RENV_R_LIBS_USER\"" > nextflow.config
 
 ############################## 2. Run the simulation ###########################
 # create and extract the simulatr specifier
-Rscript reproduction-code-prep/realdata-validation-pipeline/sim-spec/real_data.R "${experiment}" "$B" "${grna_threshold}" "${downsampled_guides_per_target}"
-sim_spec_fp=$(realpath "reproduction-code-prep/realdata-validation-pipeline/sim-spec/real_data_${experiment}.rds")
+Rscript realdata-validation-pipeline/sim-spec/real_data.R "${experiment}" "$B" "${grna_threshold}" "${downsampled_guides_per_target}"
+sim_spec_fp=$(realpath "realdata-validation-pipeline/sim-spec/real_data_${experiment}.rds")
 
 # running sceptre on subsampled data
 echo "Running the plan for "${experiment}" experiment ..."

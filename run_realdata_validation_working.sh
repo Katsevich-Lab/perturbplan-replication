@@ -16,15 +16,15 @@ downsampled_guides_per_target=10
 Rscript -e 'renv::activate(); renv::restore()'
 
 ####################### 1. preprocess the planned experiment ###################
-Rscript reproduction-code-prep/realdata-validation-pipeline/preprocessing-files/preprocessing_${experiment}.R
-Rscript reproduction-code-prep/realdata-validation-pipeline/run_at_scale_sceptre_analysis.R "${experiment}" "${positive_proportion}" "${num_subsampled_genes}"
+Rscript realdata-validation-pipeline/preprocessing-files/preprocessing_${experiment}.R
+Rscript realdata-validation-pipeline/run_at_scale_sceptre_analysis.R "${experiment}" "${positive_proportion}" "${num_subsampled_genes}"
 
 # ##################### 2. subsample data and perform sceptre ####################
 # create the results directory
 output_dir="$LOCAL_PERTURBPLAN_DATA_DIR/realdata-validation/${experiment}" 
 
 # specify the simulatr specifier directory
-sim_spec_dir=reproduction-code-prep/realdata-validation-pipeline/sim-spec
+sim_spec_dir=realdata-validation-pipeline/sim-spec
 
 # make intermediate-files and subsample subfolder
 mkdir -p $SCRATCH_DIR/${experiment}/subsample
@@ -37,7 +37,7 @@ output_filename="real_data_results.rds"
 
 # if the output_file is already there, then the simulation will be skipped
 if [ ! -f "$output_dir/$output_filename" ]; then
-  bash reproduction-code-prep/realdata-validation-pipeline/run_subsample_analysis.sh \
+  bash realdata-validation-pipeline/run_subsample_analysis.sh \
     --B $num_subsample \
     --sim_spec_dir $sim_spec_dir \
     --experiment $experiment \
@@ -51,8 +51,8 @@ else
 fi
 
 ######################## 3. Compute the PerturbPlan power ######################
-Rscript reproduction-code-prep/realdata-validation-pipeline/PerturbPlan/Prospective_power_perturbplan.R "${experiment}"
+Rscript realdata-validation-pipeline/PerturbPlan/Prospective_power_perturbplan.R "${experiment}"
 
 ################# 4. Summarize downsampling power and plotting #################
-Rscript reproduction-code-prep/realdata-validation-pipeline/PerturbPlan/summarize_validation_results.R "${experiment}"
+Rscript realdata-validation-pipeline/PerturbPlan/summarize_validation_results.R "${experiment}"
 

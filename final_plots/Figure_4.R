@@ -7,10 +7,10 @@ library(cowplot)     # get_plot_component()
 library(scales)      # trans_breaks
 
 # specify the results folder
-dir_to_results <- "reproduction-code-prep/case-study/perturb-seq-case-study/results/"
+dir_to_results <- "case-study/perturb-seq-case-study/results/"
 
 # define the plots_dir
-plots_dir <- "reproduction-code-prep/final_plots/figures"
+plots_dir <- "final_plots/figures"
 if(!dir.exists(plots_dir)){
   dir.create(plots_dir, recursive = TRUE)
 }

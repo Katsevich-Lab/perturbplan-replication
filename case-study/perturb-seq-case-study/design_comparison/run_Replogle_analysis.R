@@ -2,7 +2,7 @@
 library(dplyr)
 
 # source helper script
-source("reproduction-code-prep/case-study/helper.R")
+source("case-study/helper.R")
 
 # load K562 pilot data
 data("K562_Gasperini", package = "perturbplan")
@@ -12,16 +12,16 @@ discovery_dataset <- "Replogle"
 discovery_table <- obtain_discovery_table(dataset_name = discovery_dataset)
 
 # obtain auxiliary information
-replogle_info <- readxl::read_excel("reproduction-code-prep/case-study/discovery-table/replogle_2022_p_values.xlsx", sheet = "TabA_K562_day8_summary_stat")
+replogle_info <- readxl::read_excel("case-study/discovery-table/replogle_2022_p_values.xlsx", sheet = "TabA_K562_day8_summary_stat")
 
 # path to power results
-dir_to_results <- sprintf("reproduction-code-prep/case-study/perturb-seq-case-study/results/%s/", discovery_dataset)
+dir_to_results <- sprintf("case-study/perturb-seq-case-study/results/%s/", discovery_dataset)
 if(!dir.exists(dir_to_results)){
   dir.create(dir_to_results, recursive = TRUE)
 }
 
 ############################## Obtain fixed parameters #########################
-fixed_parameters <- readRDS("reproduction-code-prep/case-study/fixed_parameters.rds")
+fixed_parameters <- readRDS("case-study/fixed_parameters.rds")
 fdr_target <- fixed_parameters$fdr_target
 precision <- fixed_parameters$precision
 mapping_efficiency <- fixed_parameters$mapping_efficiency
@@ -96,14 +96,14 @@ baseline_expression_stats <- perturbplan:::extract_expression_info(biological_sy
 control_group <- "nt_cells"
 
 # retrospective analysis
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/retrospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/retrospective_analysis.R")
 
 # do restrospective plotting
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/plot_retrospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/plot_retrospective_analysis.R")
 
 ######################### Perform cost-power analysis ##########################
 # prospective analysis
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/prospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/prospective_analysis.R")
 
 # do prospective analysis plot
-source("reproduction-code-prep/case-study/perturb-seq-case-study/utils/plot_prospective_analysis.R")
+source("case-study/perturb-seq-case-study/utils/plot_prospective_analysis.R")

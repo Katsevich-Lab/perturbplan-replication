@@ -3,7 +3,7 @@ library(ggplot2)
 library(dplyr)
 
 # load the estimated effect size
-results_dir <- paste0("reproduction-code-prep/realdata-validation-pipeline/intermediate-files/", experiment)
+results_dir <- paste0("realdata-validation-pipeline/intermediate-files/", experiment)
 
 # Load positive control results including both gene_tss and known_enhancer
 positive_cntrl_results <- readRDS(paste0(results_dir, "/discovery_es_at_scale.rds")) |> 
@@ -224,7 +224,7 @@ discovery_pairs_heavy_tail <- create_discovery_pairs(fc_distr_heavy_tail_df, "he
 
 # Step 7: Save results
 # Create output directory if it doesn't exist
-output_dir <- paste0("reproduction-code-prep/realdata-validation-pipeline/intermediate-files/", experiment)
+output_dir <- paste0("realdata-validation-pipeline/intermediate-files/", experiment)
 if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }

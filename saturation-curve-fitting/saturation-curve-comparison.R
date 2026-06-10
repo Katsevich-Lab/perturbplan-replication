@@ -8,10 +8,10 @@ library(preseqR)
 # set seed and source necessary files
 set.seed(20)
 source("~/.Rprofile")
-source("reproduction-code-prep/saturation-curve-fitting/helper.R")
+source("saturation-curve-fitting/helper.R")
 
 # specify the directory to results
-dir_to_results <- "reproduction-code-prep/saturation-curve-fitting/results"
+dir_to_results <- "saturation-curve-fitting/results"
 
 # -----------------------------
 # Global configs
@@ -115,7 +115,7 @@ make_validation_grid <- function(read_umi_df, library_parameters, log_model,
 data("T_CD8_Shifrut")
 
 # construct Read-UMI table
-read_umi_path_tcd8 <- "reproduction-code-prep/saturation-curve-fitting/results/read_umi_df_tcd8.rds"
+read_umi_path_tcd8 <- "saturation-curve-fitting/results/read_umi_df_tcd8.rds"
 if (file.exists(read_umi_path_tcd8)) {
   read_umi_df_tcd8 <- readRDS(read_umi_path_tcd8)
 } else {
@@ -140,8 +140,8 @@ grid_tcd8 <- make_validation_grid(
 
 # ---- K562_Gasperini (standard) ----
 data("K562_Gasperini")
-read_umi_cache_k562 <- "reproduction-code-prep/saturation-curve-fitting/results/read_umi_df_k562.rds"
-param_cache_k562    <- sprintf("reproduction-code-prep/saturation-curve-fitting/results/library_parameters_on_%d_SRRs.rds", num_SRR_in_use)
+read_umi_cache_k562 <- "saturation-curve-fitting/results/read_umi_df_k562.rds"
+param_cache_k562    <- sprintf("saturation-curve-fitting/results/library_parameters_on_%d_SRRs.rds", num_SRR_in_use)
 
 # Construct Read-UMI table using fixed downsampling ratios (same as T_CD8)
 k562_result <- load_or_compute(
@@ -178,8 +178,8 @@ saveRDS(plot_data_validation, sprintf("%s/saturation_curve_comparison.rds", dir_
 # ============================================================
 # Part B: Varying sequencing saturation plot (K562 varying_sd) -> panel c
 # ============================================================
-read_umi_cache_vsd <- "reproduction-code-prep/saturation-curve-fitting/results/read_umi_df_varying_sd.rds"
-param_cache_vsd    <- sprintf("reproduction-code-prep/saturation-curve-fitting/results/library_parameters_on_%d_SRRs_varying_sd.rds", num_SRR_in_use)
+read_umi_cache_vsd <- "saturation-curve-fitting/results/read_umi_df_varying_sd.rds"
+param_cache_vsd    <- sprintf("saturation-curve-fitting/results/library_parameters_on_%d_SRRs_varying_sd.rds", num_SRR_in_use)
 
 # Construct Read-UMI table by varying sequencing depth
 k562_vsd <- load_or_compute(
@@ -225,8 +225,8 @@ saveRDS(read_umi_grid_df_vsd, sprintf("%s/saturation_curve_comparison_varying_se
 # ============================================================
 # Part C: Varying sequencing saturation plot (K562_10x varying_sd) -> panel d
 # ============================================================
-read_umi_cache_vsd_10x <- "reproduction-code-prep/saturation-curve-fitting/results/read_umi_df_varying_sd_10x.rds"
-param_cache_vsd_10x    <- "reproduction-code-prep/saturation-curve-fitting/results/library_parameters_10x_varying_sd.rds"
+read_umi_cache_vsd_10x <- "saturation-curve-fitting/results/read_umi_df_varying_sd_10x.rds"
+param_cache_vsd_10x    <- "saturation-curve-fitting/results/library_parameters_10x_varying_sd.rds"
 
 # Construct Read-UMI table by varying sequencing depth for 10x data
 k562_10x_vsd <- load_or_compute(
@@ -273,8 +273,8 @@ saveRDS(read_umi_grid_df_vsd_10x, sprintf("%s/saturation_curve_comparison_varyin
 # ============================================================
 # Part D: Varying sequencing saturation plot (TCD8 varying_sd) -> panel e
 # ============================================================
-read_umi_cache_vsd_tcd8 <- "reproduction-code-prep/saturation-curve-fitting/results/read_umi_df_varying_sd_tcd8.rds"
-param_cache_vsd_tcd8    <- "reproduction-code-prep/saturation-curve-fitting/results/library_parameters_tcd8_varying_sd.rds"
+read_umi_cache_vsd_tcd8 <- "saturation-curve-fitting/results/read_umi_df_varying_sd_tcd8.rds"
+param_cache_vsd_tcd8    <- "saturation-curve-fitting/results/library_parameters_tcd8_varying_sd.rds"
 
 # Construct Read-UMI table by varying sequencing depth for TCD8 data
 tcd8_vsd <- load_or_compute(

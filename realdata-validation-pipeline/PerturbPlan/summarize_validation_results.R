@@ -25,10 +25,10 @@ if(experiment == "Gasperini"){
 
 # source the necessary scripts
 source("~/.Rprofile")
-source("reproduction-code-prep/realdata-validation-pipeline/helper-preprocess.R")
+source("realdata-validation-pipeline/helper-preprocess.R")
 
 # load the simulation results
-intermediate_files_folder <- "reproduction-code-prep/realdata-validation-pipeline/intermediate-files"
+intermediate_files_folder <- "realdata-validation-pipeline/intermediate-files"
 
 ########################## 0. Prepare for summarizing ##########################
 # input the parameter dataframe
@@ -37,7 +37,7 @@ result_dir <- paste0(.get_config_path("LOCAL_PERTURBPLAN_DATA_DIR"), "/realdata-
 simulation_results <- readRDS(sprintf("%s/%s/real_data_results.rds", result_dir, experiment))
 
 # load the analytic results
-analytic_results <- readRDS(sprintf("reproduction-code-prep/realdata-validation-pipeline/PerturbPlan/results/%s_%s_perturbplan_overall_power.rds",
+analytic_results <- readRDS(sprintf("realdata-validation-pipeline/PerturbPlan/results/%s_%s_perturbplan_overall_power.rds",
                                     experiment, window_def))
 
 ######################## 1. Perform multiplicity correction ####################
@@ -245,8 +245,8 @@ by_reads_per_cell <- merged_results |>
 
 # Third row: effect size distribution for each discovery set (light and heavy only)
 # Load the discovery data for each tail type to get the actual effect sizes used
-light_tail_data <- readRDS(sprintf("reproduction-code-prep/realdata-validation-pipeline/intermediate-files/%s/fc_distr_light_tail_%s.rds", experiment, window_def))
-heavy_tail_data <- readRDS(sprintf("reproduction-code-prep/realdata-validation-pipeline/intermediate-files/%s/fc_distr_heavy_tail_%s.rds", experiment, window_def))
+light_tail_data <- readRDS(sprintf("realdata-validation-pipeline/intermediate-files/%s/fc_distr_light_tail_%s.rds", experiment, window_def))
+heavy_tail_data <- readRDS(sprintf("realdata-validation-pipeline/intermediate-files/%s/fc_distr_heavy_tail_%s.rds", experiment, window_def))
 
 # Get the specific plugin effect sizes used for analytic power calculation
 light_max_effect <- max(light_tail_data$fold_change, na.rm = TRUE)
@@ -311,7 +311,7 @@ legend_plot <- get_plot_component(power_plot_with_legend + theme(legend.title = 
 validation_plot <- effect_size_plot / by_cells_per_target / by_reads_per_cell
 
 # Save the ggplot object as RDS to results/ folder
-results_path <- "reproduction-code-prep/realdata-validation-pipeline/PerturbPlan/results"
+results_path <- "realdata-validation-pipeline/PerturbPlan/results"
 saveRDS(validation_plot, sprintf("%s/%s_%s_plot.rds", results_path, experiment, window_def))
 
 # Save the legend as separate RDS file

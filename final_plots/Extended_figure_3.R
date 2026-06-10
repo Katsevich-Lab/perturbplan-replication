@@ -6,17 +6,17 @@ library(scales)
 library(cowplot)
 library(minpack.lm)
 library(preseqR)
-source("reproduction-code-prep/saturation-curve-fitting/helper.R")
+source("saturation-curve-fitting/helper.R")
 
 # -----------------------------
 # Output location
 # -----------------------------
-plots_dir <- "reproduction-code-prep/final_plots/figures"
+plots_dir <- "final_plots/figures"
 out_pdf   <- file.path(plots_dir, "extended_figure_3.pdf")
 num_SRR_in_use <- 1
 
 # specify the results folder
-dir_to_results <- "reproduction-code-prep/saturation-curve-fitting/results"
+dir_to_results <- "saturation-curve-fitting/results"
 
 # add plotting theme
 common_validation_theme <- function() {

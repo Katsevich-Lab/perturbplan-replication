@@ -5,8 +5,8 @@ library(perturbplan)
 library(patchwork)
 
 # load the baseline information
-baseline_expression <- readRDS("reproduction-code-prep/simulation-benchmarking/baseline_expression.rds")
-simulated_power <- readRDS("reproduction-code-prep/simulation-benchmarking/averaged_simulation_results.rds")
+baseline_expression <- readRDS("simulation-benchmarking/baseline_expression.rds")
+simulated_power <- readRDS("simulation-benchmarking/averaged_simulation_results.rds")
 
 # prepare for analytic power computation 
 analytic_power <- NULL
@@ -227,4 +227,4 @@ power_plots <- (power_vs_cells | power_vs_fold_change)
 combined_plot <- power_plots | timing_plot
 
 # Save the plotting object
-saveRDS(combined_plot, "reproduction-code-prep/simulation-benchmarking/benchmarking_plot.rds")
+saveRDS(combined_plot, "simulation-benchmarking/benchmarking_plot.rds")

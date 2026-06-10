@@ -7,7 +7,7 @@ library(scales)
 data("K562_Gasperini")
 
 # make directory
-dir_to_results <- "reproduction-code-prep/saturation-curve-fitting/results"
+dir_to_results <- "saturation-curve-fitting/results"
 if(!dir.exists(dir_to_results)){
   dir.create(dir_to_results)
 }

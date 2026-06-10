@@ -5,7 +5,7 @@ library(ggplot2)
 library(patchwork)
 library(cowplot)
 library(gridExtra)
-source("reproduction-code-prep/final_plots/Extended_figure_1/helper.R")
+source("final_plots/Extended_figure_1/helper.R")
 
 # load data
 data("K562_Gasperini")
@@ -33,7 +33,7 @@ objs <- list(
 )
 
 # Generate or load the cells and reads summary
-rds_file <- "reproduction-code-prep/final_plots/Extended_figure_1/cells_and_reads_summary.rds"
+rds_file <- "final_plots/Extended_figure_1/cells_and_reads_summary.rds"
 if (file.exists(rds_file)) {
   message("Loading existing cells_and_reads_summary.rds")
   cells_and_reads <- readRDS(rds_file)
@@ -166,5 +166,5 @@ Figure_metrics <- wrap_plots(metric_plots, ncol = 2) +
   )
 
 # ---- save (set plots_dir if you use it elsewhere) ----
-plots_dir <- "reproduction-code-prep/final_plots/figures/"
+plots_dir <- "final_plots/figures/"
 ggsave(file.path(plots_dir, "extended_figure_1.pdf"), Figure_metrics, width = 14, height = 16)

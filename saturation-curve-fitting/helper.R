@@ -1,4 +1,4 @@
-source("reproduction-code-prep/realdata-validation-pipeline/helper-preprocess.R")
+source("realdata-validation-pipeline/helper-preprocess.R")
 
 # Helper function on obtaining downsampled UMI
 downsample_and_count_UMI <- function(data, ratios, target_genes = NULL, seed = 42) {

@@ -192,4 +192,4 @@ p <- ggplot() +
 p
 
 # Save the plot
-ggsave("reproduction-code-prep/final_plots/figures/cost_minimization_plot.pdf", p, width = 3.4, height = 2.5)
+ggsave("final_plots/figures/cost_minimization_plot.pdf", p, width = 3.4, height = 2.5)

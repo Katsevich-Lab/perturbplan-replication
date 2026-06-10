@@ -7,13 +7,13 @@ obtain_discovery_table <- function(dataset_name){
   # switch over different dataset 
   switch(dataset_name,
          Ray = {
-           readRDS("reproduction-code-prep/case-study/discovery-table/DC_TAP_seq_left_sided_pvalues.rds")
+           readRDS("case-study/discovery-table/DC_TAP_seq_left_sided_pvalues.rds")
          },
          Gasperini = {
            readRDS(paste0(.get_config_path("LOCAL_PERTURBPLAN_DATA_DIR"), "case-studies/gasperini-discovery-pairs.rds"))
          },
          Morris = {
-           readxl::read_excel("reproduction-code-prep/case-study/discovery-table/morris_2023_table_s3.xlsx", sheet = "Table S3F", skip = 2)
+           readxl::read_excel("case-study/discovery-table/morris_2023_table_s3.xlsx", sheet = "Table S3F", skip = 2)
          },
          Replogle = {
            readRDS(paste0(.get_config_path("LOCAL_PERTURBPLAN_DATA_DIR"), "case-studies/replogle-discovery-pairs.rds"))
