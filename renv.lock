@@ -2439,14 +2439,14 @@
     },
     "perturbplan": {
       "Package": "perturbplan",
-      "Version": "0.2.0",
+      "Version": "0.3.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "katsevich-lab",
       "RemoteRepo": "perturbplan",
-      "RemoteRef": "dev",
-      "RemoteSha": "030866aa21d03a96bb3b9573669315c45fda3ca3",
+      "RemoteRef": "main",
+      "RemoteSha": "615ef7bb05a7caffa8fc0117d070510e2edba5bb",
       "Requirements": [
         "BH",
         "Matrix",
