@@ -17,6 +17,15 @@ This option regenerates the manuscript figures and tables from precomputed resul
 
 **Requirements:** **R 4.4.1** and a Unix-like OS (e.g. macOS or Windows WSL2). The pinned environment (`renv.lock`, R 4.4.1 / Bioconductor 3.19) is built for R 4.4.1; restoring it on substantially newer R versions may fail to compile some dependencies. If you don't already have R 4.4.1, install it **alongside** your current R (it does not replace it): `rig add 4.4.1` with [rig](https://github.com/r-lib/rig), or the signed CRAN installer under <https://cran.r-project.org/bin/>.
 
+On macOS, `renv::restore()` compiles a few GitHub-hosted packages (e.g. `ondisc`, `sceptre`) from source, and these link against **OpenSSL**. If the restore fails with `ld: library 'crypto' not found`, install OpenSSL with Homebrew (`brew install openssl@3`) and point R's compiler/linker at it before retrying — e.g. add to `~/.R/Makevars`:
+
+```make
+LDFLAGS += -L/opt/homebrew/opt/openssl@3/lib
+CPPFLAGS += -I/opt/homebrew/opt/openssl@3/include
+```
+
+(or set `PKG_CONFIG_PATH=/opt/homebrew/opt/openssl@3/lib/pkgconfig`).
+
 ### Steps
 
 1. **Get the code.** Clone the repository (or use the copy bundled in the supplementary software):
@@ -25,7 +34,7 @@ This option regenerates the manuscript figures and tables from precomputed resul
    cd perturbplan-replication
    ```
 
-2. **Generate figures and tables using R.** Run all commands from the repository root:
+2. **Generate figures and tables using R.** Run all commands from the repository root, under **R 4.4.1** (if it isn't your default R, switch with `rig default 4.4.1`, or invoke the 4.4.1 `Rscript` explicitly):
    ```bash
    # Install the pinned R package environment
    Rscript -e 'renv::activate(); renv::restore()'
@@ -42,10 +51,13 @@ This option regenerates the manuscript figures and tables from precomputed resul
 
    # Supplementary FDP curve
    Rscript final_plots/Supplementary-figure-FDP-curve.R
-   ```
-   Figures and tables are written to `final_plots/figures/`.
 
-3. **Polish figures using Keynote.** Figures 1 and 2 and Extended Table 1 are assembled in Keynote (`Figure_1.key`, `Figure_2.key`, and `Extended_table_1.key` under `final_plots/`, respectively). Figure 4 is also finalized in Keynote from `final_plots/figures/figure_4.R`. Extended Figure 2 is a screenshot of [PerturbPlanApp](https://katsevich-lab-perturbplan.share.connect.posit.cloud/).
+   # Source data (the source_data.xlsx workbook underlying the figures)
+   Rscript final_plots/source_data_export.R
+   ```
+   Figures, tables, and the source-data workbook are written to `final_plots/figures/`.
+
+3. **Polish figures using Keynote.** Figures 1 and 2 and Extended Table 1 are assembled in Keynote (`Figure_1.key`, `Figure_2.key`, and `Extended_table_1.key` under `final_plots/`, respectively). Figure 4 is also finalized in Keynote from `final_plots/figures/figure_4.pdf`. Extended Figure 2 is a screenshot of [PerturbPlanApp](https://katsevich-lab-perturbplan.share.connect.posit.cloud/).
 
 ## Option 2 (Complete): Rerun All Analyses
 
@@ -108,7 +120,7 @@ This option reruns the full pipeline from raw data. It **cannot** be run from a 
    need to create `~/.research_config` as above — no `~/.Rprofile` setup is
    required.
 
-6. **(Optional) Run simulation benchmarking.** Code for reproducing the simulation-based power estimates is available in this GitHub [repository](https://github.com/ZiangNiu6/Sceptre_Power_Simulations). For the comparison with PerturbPlan power, we use two output RDS files: [baseline_expression.rds](https://github.com/ZiangNiu6/Sceptre_Power_Simulations/blob/main/analysis/results_summary/baseline_expression.rds) and [averaged_simulation_results.rds](https://github.com/ZiangNiu6/Sceptre_Power_Simulations/blob/main/analysis/results_summary/averaged_simulation_results.rds). To skip the simulation step, these files are also provided in [this folder](https://github.com/Katsevich-Lab/experimental-design/tree/main/reproduction-code-prep/simulation-benchmarking).
+6. **(Optional) Run simulation benchmarking.** Code for reproducing the simulation-based power estimates is available in this GitHub [repository](https://github.com/ZiangNiu6/Sceptre_Power_Simulations). The comparison with PerturbPlan power uses three output RDS files: [baseline_expression.rds](https://github.com/ZiangNiu6/Sceptre_Power_Simulations/blob/main/analysis/results_summary/baseline_expression.rds) and [averaged_simulation_results.rds](https://github.com/ZiangNiu6/Sceptre_Power_Simulations/blob/main/analysis/results_summary/averaged_simulation_results.rds) (the power estimates), plus `simulation_timing_data.rds` (the wall-clock time each simulation took, used for the timing comparison). To skip the simulation step, all three are provided in [`simulation-benchmarking/`](simulation-benchmarking).
 
 7. **Run the other analyses.** Run all commands from the repository root:
    ```bash

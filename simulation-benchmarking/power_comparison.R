@@ -186,7 +186,7 @@ power_vs_fold_change <- ggplot(plot2_data, aes(x = fold_change, y = power, color
 
 # Third plot: Timing comparison (averaged)
 # Load simulation timing data
-simulation_timing <- readRDS("code/benchmarking/simulation_timing_data.rds")
+simulation_timing <- readRDS("simulation-benchmarking/simulation_timing_data.rds")
 
 # Calculate average timing for each method (scaled by 1000)
 avg_timing <- data.frame(
